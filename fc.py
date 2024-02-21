@@ -463,7 +463,9 @@ if bt:
         title_opts=opts.TitleOpts(title=""),
         xaxis_opts=opts.AxisOpts(axislabel_opts=opts.LabelOpts(color="white"), splitline_opts=opts.SplitLineOpts(is_show=False)),
         yaxis_opts=opts.AxisOpts(axislabel_opts=opts.LabelOpts(color="white"), splitline_opts=opts.SplitLineOpts(is_show=False)),
-        legend_opts=opts.LegendOpts(is_show=True)
+        legend_opts=opts.LegendOpts(is_show=True),
+        tooltip_opts=opts.TooltipOpts(trigger="axis", axis_pointer_type="cross",
+                                                           formatter=opts.TooltipOpts(formatter='{b}: {c}')
         )
     )
     st_pyecharts(forecast1)
@@ -478,8 +480,6 @@ if bt:
                 # Create bar charts for each variable
 
     bar_lossamt = generate_bar_chart(lossamt.squeeze(), "")
-    st.write("Алдагдлын дүн")
-    st_pyecharts(bar_lossamt)
     st.write("Алдагдлын тоо")
     bar_lossqty = generate_bar_chart(lossqty.squeeze(), "")
     st_pyecharts(bar_lossqty)
