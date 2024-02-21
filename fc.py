@@ -14,11 +14,11 @@ from scipy.stats import gaussian_kde
 from streamlit_echarts import st_pyecharts
 from pyecharts.charts import Line, Bar, Scatter, Boxplot
 
-df = pd.read_csv('data/df1.csv')
-inv = pd.read_csv('data/RemainingInventory.csv')
-items = pd.read_csv('data/ItemList.csv')
-fcst = pd.read_csv('data/forecast.csv')
-err = pd.read_csv('data/errors.csv')
+df = pd.read_csv('df1.csv')
+inv = pd.read_csv('RemainingInventory.csv')
+items = pd.read_csv('ItemList.csv')
+fcst = pd.read_csv('forecast.csv')
+err = pd.read_csv('errors.csv')
 
 
 item_pivot = df.pivot_table(index='date', columns='item_name', values='qty', aggfunc='sum', fill_value=0)
