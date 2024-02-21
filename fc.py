@@ -14,15 +14,12 @@ from scipy.stats import gaussian_kde
 from streamlit_echarts import st_pyecharts
 from pyecharts.charts import Line, Bar, Scatter, Boxplot
 
-df = pd.read_csv('data/Sales.csv')
+df = pd.read_csv('data/df1.csv')
 inv = pd.read_csv('data/RemainingInventory.csv')
 items = pd.read_csv('data/ItemList.csv')
 fcst = pd.read_csv('data/forecast.csv')
 err = pd.read_csv('data/errors.csv')
 
-df.columns = ['date','item_key','item_name','amt','qty','base_price','new_price','on_sale','on_supply','group','category','drop','brand','vendor']
-df = df.drop(columns=['drop','on_supply'])
-df = df.groupby(['date','item_key','item_name','group','category','brand','vendor','base_price','new_price']).sum().reset_index()
 
 item_pivot = df.pivot_table(index='date', columns='item_name', values='qty', aggfunc='sum', fill_value=0)
 correlation_matrix = item_pivot.corr()
@@ -427,7 +424,7 @@ if bt:
     fig = px.imshow(exp_1.corr(),color_continuous_scale=['white', 'blue'])
     st.plotly_chart(fig,use_container_width=True)
     st.divider()
-    st.write('Forecast')
+    st.write('Прогноз')
     fcst_1 = fcst[fcst.item_name==item_choices].set_index('date')[['predicted_quantity','qty','preds']]
     fcst_1 = fcst_1.rename(columns={'predicted_quantity':'AUTO',
                     'qty':'REAL',
@@ -435,9 +432,9 @@ if bt:
     forecast1 = (
     Line()
     .add_xaxis(fcst_1.index.tolist())
-    .add_yaxis("AUTO", fcst_1['AUTO'].tolist(), linestyle_opts=opts.LineStyleOpts(color="orange", type_="dashed"),symbol="none", label_opts=opts.LabelOpts(is_show=False), itemstyle_opts=opts.ItemStyleOpts(color="orange"))
-    .add_yaxis("REAL", fcst_1['REAL'].tolist(), linestyle_opts=opts.LineStyleOpts(color="red", type_="solid"),symbol="none", label_opts=opts.LabelOpts(is_show=False), itemstyle_opts=opts.ItemStyleOpts(color="red"))
-    .add_yaxis("ML", fcst_1['ML'].tolist(), linestyle_opts=opts.LineStyleOpts(color="white", type_="dashed"),symbol="none", label_opts=opts.LabelOpts(is_show=False), itemstyle_opts=opts.ItemStyleOpts(color="white"))
+    .add_yaxis("Автомат захиалга", fcst_1['AUTO'].tolist(), linestyle_opts=opts.LineStyleOpts(color="orange", type_="dashed"),symbol="none", label_opts=opts.LabelOpts(is_show=False), itemstyle_opts=opts.ItemStyleOpts(color="orange"))
+    .add_yaxis("Бодит", fcst_1['REAL'].tolist(), linestyle_opts=opts.LineStyleOpts(color="red", type_="solid", width=2),symbol="none", label_opts=opts.LabelOpts(is_show=False), itemstyle_opts=opts.ItemStyleOpts(color="red"))
+    .add_yaxis("Загвар", fcst_1['ML'].tolist(), linestyle_opts=opts.LineStyleOpts(color="white", type_="dashed"),symbol="none", label_opts=opts.LabelOpts(is_show=False), itemstyle_opts=opts.ItemStyleOpts(color="white"))
     .set_global_opts(
         title_opts=opts.TitleOpts(title="Line Chart"),
         xaxis_opts=opts.AxisOpts(axislabel_opts=opts.LabelOpts(color="white"), splitline_opts=opts.SplitLineOpts(is_show=False)),
@@ -446,10 +443,13 @@ if bt:
         )
     )
     st_pyecharts(forecast1)
-    lossmetrics = err[err.item_name==item_choices]
-    lossamt = lossmetrics[['auto_loss_amt', 'ml_loss_amt']]
-    lossqty = lossmetrics[['auto_CFE', 'ml_CFE']]
-    loss_err = lossmetrics[['auto_RMSE','ml_RMSE','auto_MAE','ml_MAE','auto_MSE','ml_MSE']]
+    lossmetrics = err[err.item_name==item_choices].rename(columns={'auto_loss_amt':'Автомат захиалгын алдагдлын дүн',
+                                                                  'ml_loss_amt':'Загварын алдагдлын дүн',
+                                                                  'auto_CFE':'Автомат захиалгын нийт алдагдлын тоо',
+                                                                  'ml_CFE':'Загварын нийт алдагдлын тоо'})
+    lossamt = lossmetrics[['Автомат захиалгын алдагдлын дүн', 'Загварын алдагдлын дүн']]
+    lossqty = lossmetrics[['Автомат захиалгын нийт алдагдлын тоо', 'Загварын нийт алдагдлын тоо']]
+    loss_err = lossmetrics[['auto_RMSE','ml_RMSE','auto_MAE','ml_MAE']]
 
                 # Create bar charts for each variable
 
