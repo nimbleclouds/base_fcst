@@ -348,7 +348,7 @@ if bt:
         # Assuming eda is your DataFrame and item_choices is a list of item names
         k_1 = eda[eda['item_name'] == item_choices]
         k_1 = k_1.set_index('date')
-        k_1 = k_1.resample('M').mean()
+        k_1 = k_1.resample('M').mean(numeric_only=True)
         numeric_dates_1 = (k_1.index - k_1.index[0]).days
         coefficients = np.polyfit(numeric_dates_1, k_1['qty'], 1)
         trendline_x = numeric_dates_1  # Use original x-axis data for the trendline
