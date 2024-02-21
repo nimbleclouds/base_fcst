@@ -465,7 +465,9 @@ if bt:
         yaxis_opts=opts.AxisOpts(axislabel_opts=opts.LabelOpts(color="white"), splitline_opts=opts.SplitLineOpts(is_show=False)),
         legend_opts=opts.LegendOpts(is_show=True),
         tooltip_opts=opts.TooltipOpts(trigger="axis", axis_pointer_type="cross",
-                                                           formatter=opts.TooltipOpts(formatter='{b}: {c}')))
+                                                           formatter=opts.TooltipOpts(formatter='{b}: {c}'))))
+
+    
     st_pyecharts(forecast1)
     lossmetrics = err[err.item_name==item_choices].rename(columns={'auto_loss_amt':'Автомат захиалгын алдагдлын дүн',
                                                                   'ml_loss_amt':'Загварын алдагдлын дүн',
