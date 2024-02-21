@@ -146,7 +146,7 @@ def date_features(df):
     df['day'] = dataset.date.dt.day
     df['season'] = dataset.date.dt.quarter
     df['dayofyear'] = dataset.date.dt.dayofyear
-    df['weekofyear'] = dataset.date.dt.weekofyear
+    df['weekofyear'] = dataset.date.isocalendar().week
     df['day^year'] = np.log((np.log(dataset['dayofyear'] + 1)) ** (dataset['year'] - 2000))
     return df
 start_date = '2022-07-08'
