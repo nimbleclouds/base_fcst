@@ -460,7 +460,7 @@ if bt:
     .add_yaxis("Бодит", fcst_1['REAL'].tolist(), linestyle_opts=opts.LineStyleOpts(color="red", type_="solid", width=2),symbol="none", label_opts=opts.LabelOpts(is_show=False), itemstyle_opts=opts.ItemStyleOpts(color="red"))
     .add_yaxis("Загвар", fcst_1['ML'].tolist(), linestyle_opts=opts.LineStyleOpts(color="white", type_="dashed"),symbol="none", label_opts=opts.LabelOpts(is_show=False), itemstyle_opts=opts.ItemStyleOpts(color="white"))
     .set_global_opts(
-        title_opts=opts.TitleOpts(title="Line Chart"),
+        title_opts=opts.TitleOpts(title=""),
         xaxis_opts=opts.AxisOpts(axislabel_opts=opts.LabelOpts(color="white"), splitline_opts=opts.SplitLineOpts(is_show=False)),
         yaxis_opts=opts.AxisOpts(axislabel_opts=opts.LabelOpts(color="white"), splitline_opts=opts.SplitLineOpts(is_show=False)),
         legend_opts=opts.LegendOpts(is_show=True)
