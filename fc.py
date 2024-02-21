@@ -40,6 +40,7 @@ st.write("2 жилийн (2022-2023 он) хоорондын борлуулал�
 item_choices = st.selectbox('Бараа сонгох:',item)
 item_info = df[df['item_name']==item_choices][['item_key','item_name','group','category','brand','vendor','base_price']]
 item_info = item_info.groupby(['item_key','item_name','group','category','brand','vendor']).mean().reset_index()
+st.write(df)
 df_sum = df.groupby(['item_name']).sum().reset_index()
 df_avg = df.groupby(['item_name']).mean().reset_index()
 eda = df[df['item_name'].isin(item.tolist())].set_index('date')[['item_name','item_key','base_price','new_price','amt','qty','on_sale']].copy()
