@@ -19,7 +19,7 @@ inv = pd.read_csv('RemainingInventory.csv')
 items = pd.read_csv('ItemList.csv')
 fcst = pd.read_csv('forecast.csv')
 err = pd.read_csv('errors.csv')
-
+df['date'] = df.date.astype('datetime64[ns]')
 item = df.item_name.unique()
 
 st.title("Номин Юнайтед Хайпермаркетын барааны борлуулалт тооцоолох загварын практикал тест")
