@@ -5,7 +5,6 @@ pandas
 datetime
 plotly.express
 seaborn
-pickle
 sklearn
 pyecharts
 scipy.stats
