@@ -176,7 +176,7 @@ result_df['Night_Temperature'] = result_df['Night_Temperature'].astype(int)
 date_features(result_df)
 
 
-with open('model/base_rf_model.pkl', 'rb') as f:
+with open('base_rf_model.pkl', 'rb') as f:
     rf = pickle.load(f)
 def generate_bar_chart(data, title):
     bar = (
