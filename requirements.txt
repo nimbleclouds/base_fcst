@@ -6,5 +6,5 @@ datetime
 plotly.express
 seaborn
 pyecharts
-scipy.stats
+scipy
 streamlit_echarts
