@@ -20,18 +20,7 @@ items = pd.read_csv('ItemList.csv')
 fcst = pd.read_csv('forecast.csv')
 err = pd.read_csv('errors.csv')
 
-
-item_pivot = df.pivot_table(index='date', columns='item_name', values='qty', aggfunc='sum', fill_value=0)
-correlation_matrix = item_pivot.corr()
-correlation_series = correlation_matrix.unstack().sort_values(ascending=False)
-top_correlations = correlation_series[correlation_series < 1].head(100)
-topcorr = top_correlations.reset_index(level=0, name='Sales').rename(columns={'item_name':'items1'}).reset_index()
-unique_values_col1 = topcorr['item_name'].unique()
-unique_values_col2 = topcorr['items1'].unique()
-common_values = np.intersect1d(unique_values_col1, unique_values_col2)
-item = df.groupby('item_name').sum('qty').sort_values(by='qty',ascending=False).reset_index()
-item = item[item['item_name'].isin(common_values[:30])]
-item = item.item_name.unique()
+item = df.item_name.unique()
 
 st.title("Номин Юнайтед Хайпермаркетын барааны борлуулалт тооцоолох загварын практикал тест")
 st.write("2 жилийн (2022-2023 он) хоорондын борлуулалтын үр дүн дээр суурилсан")
@@ -40,7 +29,7 @@ st.write("2 жилийн (2022-2023 он) хоорондын борлуулал�
 item_choices = st.selectbox('Бараа сонгох:',item)
 item_info = df[df['item_name']==item_choices][['item_key','item_name','group','category','brand','vendor','base_price']]
 item_info = item_info.groupby(['item_key','item_name','group','category','brand','vendor']).mean().reset_index()
-st.write(df.groupby(['item_name']).mean().reset_index())
+st.write(df.groupby(['item_name']).mean(numeric_only=True).reset_index())
 df_sum = df.groupby(['item_name']).sum().reset_index()
 df_avg = df.groupby(['item_name']).mean().reset_index()
 eda = df[df['item_name'].isin(item.tolist())].set_index('date')[['item_name','item_key','base_price','new_price','amt','qty','on_sale']].copy()
