@@ -34,7 +34,7 @@ df_sum = df.groupby(['item_name']).sum(numeric_only=True).reset_index()
 df_avg = df.groupby(['item_name']).mean(numeric_only=True).reset_index()
 eda = df[df['item_name'].isin(item.tolist())].set_index('date')[['item_name','item_key','base_price','new_price','amt','qty','on_sale']].copy()
 inv = inv.rename(columns={'Iteminfid':'item_key', 'Ognoo':'date'})
-eda['date'] = eda.date.astype('datetime64[ns]')
+eda.index = eda.index.astype('datetime64[ns]')
 eda = eda.merge(inv, how='left', on=['item_key','date'])
 eda = eda.groupby(['date','item_name','base_price']).sum().reset_index().set_index('date')[['item_name','base_price','qty','Uldegdel']]
 eda.index = eda.index.astype('datetime64[ns]')
