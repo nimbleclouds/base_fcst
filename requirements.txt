@@ -1,0 +1,11 @@
+streamlit
+numpy
+pandas
+datetime
+plotly.express
+seaborn
+pickle
+sklearn
+pyecharts
+scipy.stats
+streamlit_echarts
