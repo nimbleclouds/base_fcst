@@ -413,7 +413,7 @@ if bt:
     st.divider()
     st.subheader(f"Корреляци")
     exp_1 = result_df[result_df.item_name==item_choices]
-    fig = px.imshow(exp_1.corr(),color_continuous_scale=['white', 'blue'])
+    fig = px.imshow(exp_1.corr(numeric_only=True),color_continuous_scale=['white', 'blue'])
     st.plotly_chart(fig,use_container_width=True)
     st.divider()
     st.write('Прогноз')
