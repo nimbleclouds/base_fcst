@@ -486,4 +486,6 @@ if bt:
     st.write("Зөрүү")
     bar_loss_err = generate_bar_chart(loss_err.squeeze(), "")
     st_pyecharts(bar_loss_err)
-    
+
+    #Current leftover
+    st.write("Барааны үлдэгдэл")
