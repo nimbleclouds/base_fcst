@@ -490,8 +490,7 @@ if bt:
     sales_non = pd.read_csv('ordering.csv')
     for i in sales_non.name.unique():
         x = sales_non[sales_non.name==i]
-        m = x.set_index('date')[['ML_auto','Q_auto']].plot(title=i)
-        st.pyplot(m)
+        st.pyplot(x.set_index('date')[['ML_auto','Q_auto']].plot(title=i))
     
     from sklearn.metrics import mean_absolute_error, mean_squared_error
     mae = mean_absolute_error(sales_non["ml_qty"], sales_non["qty"])
