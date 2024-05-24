@@ -508,5 +508,5 @@ if bt:
     st.write(f'Загварын квадрат зөрүү:{mse}')
     mae1 = mean_absolute_error(sales_non["S0"], sales_non["qty"])
     mse1 = mean_squared_error(sales_non["S0"], sales_non["qty"], squared=True)
-    st.write(f'Автомат захиалгын абсолют зөрүү{mae1}')
-    st.write(f'Автомат захиалгын квадрат зөрүү::{mse1}')
+    st.write(f'Автомат захиалгын абсолют зөрүү:{mae1}')
+    st.write(f'Автомат захиалгын квадрат зөрүү:{mse1}')
