@@ -490,7 +490,16 @@ if bt:
     sales_non = pd.read_csv('ordering.csv')
     for i in sales_non.name.unique():
         x = sales_non[sales_non.name==i]
-        st.pyplot(x.set_index('date')[['ML_auto','Q_auto']].plot(title=i))
+        x = x.set_index('date')[['ML_auto','Q_auto']]
+        fig = px.scatter(x[['ML_auto','Q_auto']])
+        
+        fig.update_layout(xaxis_title=i', yaxis_title='')
+        st.plotly_chart(fig, use_container_width=True)
+        
+        #fig.add_scatter(x=k_1.index, y=trendline_1, mode='lines', showlegend=False)
+        #fig.update_traces(marker_color='#FF0000',showlegend=False)
+        #fig.update_layout(xaxis_title='Гараг', yaxis_title='Тоо')
+        #st.plotly_chart(fig, use_container_width=True)
     
     from sklearn.metrics import mean_absolute_error, mean_squared_error
     mae = mean_absolute_error(sales_non["ml_qty"], sales_non["qty"])
