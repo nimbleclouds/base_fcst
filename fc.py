@@ -487,7 +487,7 @@ if bt:
     bar_loss_err = generate_bar_chart(loss_err.squeeze(), "")
     st_pyecharts(bar_loss_err)
 
-    lf = pd.read_csv('ordering.csv')
+    sales_non = pd.read_csv('ordering.csv')
     for i in sales_non.name.unique():
         x = sales_non[sales_non.name==i]
         m = x.set_index('date')[['ML_auto','Q_auto']].plot(title=i)
