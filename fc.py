@@ -487,5 +487,18 @@ if bt:
     bar_loss_err = generate_bar_chart(loss_err.squeeze(), "")
     st_pyecharts(bar_loss_err)
 
-    #Current leftover
-    st.write("Барааны үлдэгдэл")
+    lf = pd.read_csv('ordering.csv')
+    for i in sales_non.name.unique():
+        x = sales_non[sales_non.name==i]
+        m = x.set_index('date')[['ML_auto','Q_auto']].plot(title=i)
+        st.plot(m)
+    
+    from sklearn.metrics import mean_absolute_error, mean_squared_error
+    mae = mean_absolute_error(sales_non["ml_qty"], sales_non["qty"])
+    mse = mean_squared_error(sales_non["ml_qty"], sales_non["qty"], squared=True)
+    st.write('MAE of ML'+mae)
+    st.write('MSE of ML'+mse)
+    mae1 = mean_absolute_error(sales_non["S0"], sales_non["qty"])
+    mse1 = mean_squared_error(sales_non["S0"], sales_non["qty"], squared=True)
+    st.write('MAE of AUTO'+mae)
+    st.write('MSE of AUTO'+mse)
