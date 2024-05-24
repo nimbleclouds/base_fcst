@@ -504,9 +504,9 @@ if bt:
     from sklearn.metrics import mean_absolute_error, mean_squared_error
     mae = mean_absolute_error(sales_non["ml_qty"], sales_non["qty"])
     mse = mean_squared_error(sales_non["ml_qty"], sales_non["qty"], squared=True)
-    st.write('MAE of ML'+mae)
-    st.write('MSE of ML'+mse)
+    st.write(f'MAE of ML:{mae}')
+    st.write(f'MSE of ML:{mse}')
     mae1 = mean_absolute_error(sales_non["S0"], sales_non["qty"])
     mse1 = mean_squared_error(sales_non["S0"], sales_non["qty"], squared=True)
-    st.write('MAE of AUTO'+mae)
-    st.write('MSE of AUTO'+mse)
+    st.write(f'MAE of ML:{mae1}')
+    st.write(f'MSE of ML:{mse1}')
