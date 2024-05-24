@@ -493,7 +493,6 @@ if bt:
         x = x.set_index('date')[['ML_auto','Q_auto']]
 
         fig = px.scatter(x[['ML_auto','Q_auto']])
-        fig.update_traces(marker_color='#FF0000',showlegend=False)
         fig.update_layout(xaxis_title=i, yaxis_title='')
         st.plotly_chart(fig, use_container_width=True)
         #fig.add_scatter(x=k_1.index, y=trendline_1, mode='lines', showlegend=False)
