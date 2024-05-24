@@ -491,22 +491,22 @@ if bt:
     for i in sales_non.name.unique():
         x = sales_non[sales_non.name==i]
         x = x.set_index('date')[['ML_auto','Q_auto']]
+        fig.update_traces(marker_color='#FF0000',showlegend=False)
         fig = px.scatter(x[['ML_auto','Q_auto']])
         
         fig.update_layout(xaxis_title=i, yaxis_title='')
         st.plotly_chart(fig, use_container_width=True)
-        
         #fig.add_scatter(x=k_1.index, y=trendline_1, mode='lines', showlegend=False)
-        #fig.update_traces(marker_color='#FF0000',showlegend=False)
+        
         #fig.update_layout(xaxis_title='Гараг', yaxis_title='Тоо')
         #st.plotly_chart(fig, use_container_width=True)
     
     from sklearn.metrics import mean_absolute_error, mean_squared_error
     mae = mean_absolute_error(sales_non["ml_qty"], sales_non["qty"])
     mse = mean_squared_error(sales_non["ml_qty"], sales_non["qty"], squared=True)
-    st.write(f'MAE of ML:{mae}')
-    st.write(f'MSE of ML:{mse}')
+    st.write(f'Загварын абсолют зөрүү:{mae}')
+    st.write(f'Загварын квадрат зөрүү:{mse}')
     mae1 = mean_absolute_error(sales_non["S0"], sales_non["qty"])
     mse1 = mean_squared_error(sales_non["S0"], sales_non["qty"], squared=True)
-    st.write(f'MAE of ML:{mae1}')
-    st.write(f'MSE of ML:{mse1}')
+    st.write(f'Автомат захиалгын абсолют зөрүү{mae1}')
+    st.write(f'Автомат захиалгын квадрат зөрүү::{mse1}')
